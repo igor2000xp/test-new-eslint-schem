@@ -21,122 +21,125 @@ npm i prettier eslint-config-prettier eslint-plugin-prettier --save-dev
 ```
 #### to the file .eslintrs.json change section overrides (add red lines):
 ```
-"overrides": [
-{
-"files": ["*.ts"],
-"parserOptions": {
-"project": [
-"tsconfig.*?.json"
-],
-"createDefaultProgram": true
-},
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": [
+          "tsconfig.*?.json"
+        ],
+        "createDefaultProgram": true
+      },
 ```
 #### to the file .eslintrs.json change section extends:
 ```
-"extends": [
-"plugin:import/recommended",
-"eslint:recommended",
-"plugin:@typescript-eslint/recommended",
-"plugin:@angular-eslint/recommended",
-"plugin:@angular-eslint/template/process-inline-templates",
-"airbnb-typescript/base",
-"plugin:prettier/recommended"
-],
+      "extends": [
+        "plugin:import/recommended",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "airbnb-typescript/base",
+        "plugin:prettier/recommended"
+      ],
 ```
 #### add this sections:
 ```
-{
-"files": ["*.component.html"],
-"extends": ["plugin:@angular-eslint/template/recommended"],
-"rules": {
-"max-len": ["warn", { "code": 140 }]
-}
-},
-{
-"files": ["*.component.ts"],
-"extends": ["plugin:@angular-eslint/template/process-inline-templates"]
-},
+    {
+      "files": ["*.component.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {
+        "max-len": ["warn", { "code": 140 }]
+      }
+    },
+    {
+      "files": ["*.component.ts"],
+      "extends": ["plugin:@angular-eslint/template/process-inline-templates"]
+    },
 ```
 #### Finally .eslintrs.json is like that:
 ```
 {
-"root": true,
-"ignorePatterns": [
-"projects/**/*"
-],
-"overrides": [
-{
-"files": ["*.ts"],
-"parserOptions": {
-"project": [
-"tsconfig.*?.json",
-"e2e/tsconfig.json" - убрать!!!!!!!!!!!!
-],
-"createDefaultProgram": true
-},
-"extends": [
-"plugin:import/recommended",
-"eslint:recommended",
-"plugin:@typescript-eslint/recommended",
-"plugin:@angular-eslint/recommended",
-"plugin:@angular-eslint/template/process-inline-templates",
-"airbnb-typescript/base",
-"plugin:prettier/recommended"
-],
-"rules": {
-"@angular-eslint/directive-selector": [
-"error",
-{
-"type": "attribute",
-"prefix": "app",
-"style": "camelCase"
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": [
+          "tsconfig.*?.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:import/recommended",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "airbnb-typescript/base",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.component.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {
+        "max-len": ["warn", { "code": 140 }]
+      }
+    },
+    {
+      "files": ["*.component.ts"],
+      "extends": ["plugin:@angular-eslint/template/process-inline-templates"]
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
 }
-],
-"@angular-eslint/component-selector": [
-"error",
-{
-"type": "element",
-"prefix": "app",
-"style": "kebab-case"
-}
-]
-}
-},
-{
-"files": ["*.component.html"],
-"extends": ["plugin:@angular-eslint/template/recommended"],
-"rules": {
-"max-len": ["warn", { "code": 140 }]
-}
-},
-{
-"files": ["*.component.ts"],
-"extends": ["plugin:@angular-eslint/template/process-inline-templates"]
-},
-{
-"files": [
-"*.html"
-],
-"extends": [
-"plugin:@angular-eslint/template/recommended"
-],
-"rules": {}
-}
-]
-}
+
 ```
 #### add into angular.json:
 ```
-"lint": {
-"builder": "@angular-eslint/builder:lint",
-"options": {
-"lintFilePatterns": [
-"src/**/*.ts",
-"src/**/*.component.html",
-"src/**/*.html"
-]
-}
-}
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.component.html",
+              "src/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
 ```
 #### Add in root project .prettierrc.json
 ```

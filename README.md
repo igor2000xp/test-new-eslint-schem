@@ -3,6 +3,7 @@
 https://dev.to/bzvyagintsev/migrate-angular-app-to-eslint-with-prettier-airbnb-styleguide-husky-and-lint-staged-862
 
 #### Angular ESLint
+```
 https://github.com/angular-eslint/angular-eslint/blob/main/.eslintrc.json
 
 ng add @angular-eslint/schematics
@@ -11,12 +12,15 @@ npm install eslint-plugin-jasmine --save-dev
 
 npm install eslint-plugin-import eslint-config-airbnb-typescript --save-dev
 
+```
 ### Prettier:
+
 The question I am interested in: why do we need to use Prettier together with ESLint, if ESLint can do all the things by itself? The answer is pretty easy — Prettier formats code much better. It removes all formatting and reprints code in the consistent style from scratch. This allows developers to forget about formatting the code and not waste time discussing the code style on code reviews.
-
+```
 npm i prettier eslint-config-prettier eslint-plugin-prettier --save-dev
-
-to the file .eslintrs.json change section overrides (add red lines):
+```
+#### to the file .eslintrs.json change section overrides (add red lines):
+```
 "overrides": [
 {
 "files": ["*.ts"],
@@ -26,8 +30,9 @@ to the file .eslintrs.json change section overrides (add red lines):
 ],
 "createDefaultProgram": true
 },
-
-to the file .eslintrs.json change section extends:
+```
+#### to the file .eslintrs.json change section extends:
+```
 "extends": [
 "plugin:import/recommended",
 "eslint:recommended",
@@ -37,7 +42,9 @@ to the file .eslintrs.json change section extends:
 "airbnb-typescript/base",
 "plugin:prettier/recommended"
 ],
-add this sections:
+```
+#### add this sections:
+```
 {
 "files": ["*.component.html"],
 "extends": ["plugin:@angular-eslint/template/recommended"],
@@ -49,8 +56,9 @@ add this sections:
 "files": ["*.component.ts"],
 "extends": ["plugin:@angular-eslint/template/process-inline-templates"]
 },
-
-Finally .eslintrs.json is like that:
+```
+#### Finally .eslintrs.json is like that:
+```
 {
 "root": true,
 "ignorePatterns": [
@@ -116,9 +124,9 @@ Finally .eslintrs.json is like that:
 }
 ]
 }
-
-
-add into angular.json:
+```
+#### add into angular.json:
+```
 "lint": {
 "builder": "@angular-eslint/builder:lint",
 "options": {
@@ -129,8 +137,9 @@ add into angular.json:
 ]
 }
 }
-
-Add in root project .prettierrc.json
+```
+#### Add in root project .prettierrc.json
+```
 {
 "trailingComma": "es5",
 "tabWidth": 2,
@@ -144,7 +153,7 @@ Add in root project .prettierrc.json
 "arrowParens": "avoid"
 }
 
-
+```
 
 # TestNewEslintSchem
 

@@ -5,8 +5,8 @@
 ```tsx
 ng version
 ```
+![image](https://github.com/igor2000xp/test-new-eslint-schem/assets/21989277/98670e93-99d5-487b-a9f2-6326834b9996)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/d0cebd95-9b70-4600-b5b1-144b21497925/63d72ce0-14be-4a57-83a6-b985d04204c8/Untitled.png)
 
 ## Setting up the latest version of Angular (global or local)
 
@@ -28,7 +28,9 @@ npm install --save-dev @angular/cli@16.1.1
 
 [Angular CLI, Angular, Node.js, TypeScript, and RxJS version compatibility matrix. Officially part of the Angular documentation as of 2023-04-19 https://angular.io/guide/versions](https://gist.github.com/LayZeeDK/c822cc812f75bb07b7c55d07ba2719b3)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/d0cebd95-9b70-4600-b5b1-144b21497925/ff61ef25-aa93-4f1c-87b9-7a39d69540ab/Untitled.png)
+![image](https://github.com/igor2000xp/test-new-eslint-schem/assets/21989277/3f3fb16b-b5b3-4431-b677-5f8ec31edfb9)
+
+
 
 ## Some commands of nvm to manage your version of Node.JS:
 

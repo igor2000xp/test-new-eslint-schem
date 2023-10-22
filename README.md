@@ -1,3 +1,51 @@
+# Before setting up your Angular project check the current version of Angular and Node.JS on your computer.
+
+## Checking the current version of Angular
+
+```tsx
+ng version
+```
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/d0cebd95-9b70-4600-b5b1-144b21497925/63d72ce0-14be-4a57-83a6-b985d04204c8/Untitled.png)
+
+## Setting up the latest version of Angular (global or local)
+
+```tsx
+npm install -g @angular/cli
+
+// or so
+npm install -g @angular/cli@latest
+
+// or the version you need
+
+npm install -g @angular/cli@16.1.1
+
+// You can install the required version of Angular only in the current folder.
+npm install --save-dev @angular/cli@16.1.1
+```
+
+## You can check which version of Node.JS is suitable for your version of Angular here:
+
+[Angular CLI, Angular, Node.js, TypeScript, and RxJS version compatibility matrix. Officially part of the Angular documentation as of 2023-04-19 https://angular.io/guide/versions](https://gist.github.com/LayZeeDK/c822cc812f75bb07b7c55d07ba2719b3)
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/d0cebd95-9b70-4600-b5b1-144b21497925/ff61ef25-aa93-4f1c-87b9-7a39d69540ab/Untitled.png)
+
+## Some commands of nvm to manage your version of Node.JS:
+
+```tsx
+// Check and update node.js
+nvm ls
+nvm ls-remote
+nvm ls-remote 16
+nvm install --lts
+nvm use 18.12.1
+nvm alias default 18.12.1
+```
+
+## How to install nvm here:
+
+[GitHub - nvm-sh/nvm: Node Version Manager - POSIX-compliant bash script to manage multiple active node.js versions](https://github.com/nvm-sh/nvm#troubleshooting-on-macos)
+
 ## Articles:
 #### Migrate Angular app to ESLint with Prettier, AirBnB Styleguide, Husky and lint-staged
 https://dev.to/bzvyagintsev/migrate-angular-app-to-eslint-with-prettier-airbnb-styleguide-husky-and-lint-staged-862
@@ -12,6 +60,10 @@ npm install eslint-plugin-jasmine --save-dev
 
 npm install eslint-plugin-import eslint-config-airbnb-typescript --save-dev
 
+npm install eslint-config-airbnb-typescript eslint-plugin-import @ngrx/eslint-plugin --save-dev
+
+npm i prettier eslint-config-prettier eslint-plugin-prettier --save-dev
+
 ```
 ### Prettier:
 
@@ -19,18 +71,7 @@ The question I am interested in: why do we need to use Prettier together with ES
 ```
 npm i prettier eslint-config-prettier eslint-plugin-prettier --save-dev
 ```
-#### to the file .eslintrs.json change section overrides (add red lines):
-```
-  "overrides": [
-    {
-      "files": ["*.ts"],
-      "parserOptions": {
-        "project": [
-          "tsconfig.*?.json"
-        ],
-        "createDefaultProgram": true
-      },
-```
+
 #### to the file .eslintrs.json change section extends:
 ```
       "extends": [
@@ -42,20 +83,6 @@ npm i prettier eslint-config-prettier eslint-plugin-prettier --save-dev
         "airbnb-typescript/base",
         "plugin:prettier/recommended"
       ],
-```
-#### add this sections:
-```
-    {
-      "files": ["*.component.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended"],
-      "rules": {
-        "max-len": ["warn", { "code": 140 }]
-      }
-    },
-    {
-      "files": ["*.component.ts"],
-      "extends": ["plugin:@angular-eslint/template/process-inline-templates"]
-    },
 ```
 #### Finally .eslintrs.json is like that:
 ```
@@ -80,7 +107,7 @@ npm i prettier eslint-config-prettier eslint-plugin-prettier --save-dev
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
         "airbnb-typescript/base",
-        "plugin:prettier/recommended"
+				"plugin:prettier/recommended"
       ],
       "rules": {
         "@angular-eslint/directive-selector": [
@@ -98,10 +125,16 @@ npm i prettier eslint-config-prettier eslint-plugin-prettier --save-dev
             "prefix": "app",
             "style": "kebab-case"
           }
+        ],
+        "import/no-extraneous-dependencies": [
+          "error",
+          {
+            "devDependencies": true
+          }
         ]
       }
     },
-    {
+		{
       "files": ["*.component.html"],
       "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {
@@ -117,13 +150,50 @@ npm i prettier eslint-config-prettier eslint-plugin-prettier --save-dev
         "*.html"
       ],
       "extends": [
-        "plugin:@angular-eslint/template/recommended"
+        "plugin:@angular-eslint/template/recommended",
+				"plugin:@angular-eslint/template/accessibility"
       ],
       "rules": {}
+    },
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:@ngrx/recommended"
+      ]
+    },
+		{
+      "files": ["src/**/*.spec.ts", "src/**/*.d.ts"],
+      // Jasmine rules
+      "extends": ["plugin:jasmine/recommended"],
+      // Plugin to run Jasmine rules
+      "plugins": ["jasmine"],
+      "env": { "jasmine": true },
+      // Turn off 'no-unused-vars' rule
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off"
+      }
     }
   ]
 }
+```
+# Additional rules you can use
 
+```json
+"rules": {
+        "@typescript-eslint/no-unused-vars": "warn",
+        "import/prefer-default-export": "off",
+        "no-useless-constructor": "off",
+        "linebreak-style": "off",
+        "@typescript-eslint/no-useless-constructor": "warn",
+        "@angular-eslint/no-empty-lifecycle-method": "warn",
+        "@typescript-eslint/no-empty-function": "warn",
+        "class-methods-use-this": "off",
+        "no-empty-function": "off",
+        "arrow-body-style": "off",
+        "no-console": "off",
+      }
 ```
 #### add into angular.json:
 ```
@@ -150,7 +220,7 @@ npm i prettier eslint-config-prettier eslint-plugin-prettier --save-dev
 "singleQuote": true,
 "bracketSpacing": true,
 "bracketSameLine": true,
-"printWidth": 80,
+"printWidth": 120,
 "useTabs": false,
 "endOfLine": "auto",
 "arrowParens": "avoid"
